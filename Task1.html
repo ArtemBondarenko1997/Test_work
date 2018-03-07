@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	Input  data: &nbsp;&nbsp;
+<textarea class="in" rows="3">3
+2 6 9</textarea>
+<br>
+	Output data:
+<textarea class="out" rows="3"></textarea>
+<br>
+<input type="button" id="button" value="Кнопка" />
+
+</body> 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script type="text/javascript">
+/*
+	Для решения данной задачи я руководствовался слежующей логикой:
+	Фактически, при получении на месте одного из элементов массива единицы, мы можем казать,м что найболее
+	коротким путем получения на месте всех элементов единицы, будет количество шагов, которое м затратили на пллучения единицы плюс
+	количество элементов, которые в единицу надо обратить
+*/
+
+
+
+
+
+
+	var A=[], n=0, chek=false, count=0, kol=0;
+	function NOD_eq_one(A)
+{   
+    var n = A.length, x = Math.abs(A[0]);
+    for (var i = 1; i < n; i++)
+     { var y = Math.abs(A[i]);
+       while (x && y){ x > y ? x %= y : y %= x;}
+       x += y;
+     }
+     A[0]=Number(A[0]);
+    if(x==1) return true;
+    else return false;
+}
+
+	function gcd(a, b)
+{   
+    var x = Math.abs(Number(a));
+    var y = Math.abs(Number(b));
+    while (x && y){ x > y ? x %= y : y %= x; }
+    x += y;
+    return x;
+}
+	function read(){
+    	var lines = $('.in').val().replace(/^[\n\r]+|[\n\r]+$/g,'').split(/[\n\r]+/);
+    	n=Number(lines[0]);
+    	
+    	A=lines[1].split(' ',n);
+}
+
+	function сalculate(){
+kol=0;
+read();
+	console.log(A);
+	if(NOD_eq_one(A)){
+		while(true){
+			kol++;
+			count=0;
+	for (var i = A.length - 1; i > 0; i--) {
+		if (gcd(A[i],A[i-1])==1) {count+=1;}
+		A[i]=gcd(A[i],A[i-1]);
+		console.log(A);
+
+	alert(kol);
+	}
+	if(count!=0)
+	for (var j = A.length - 2; j >= 0; j--) {
+		alert(count);
+		if(count>1)
+			{if (A[j]!=1)
+		 kol++;}
+		 else
+		 	kol++;
+		alert(kol);
+	}
+
+	if(count!=0)break;}
+	$('.out').val(kol);}
+	else $('.out').val(-1);
+	}  
+button.onclick = function() {
+    сalculate();
+  };
+
+
+	
+</script>
